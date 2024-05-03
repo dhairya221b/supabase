@@ -7,7 +7,7 @@ spec:
   interval: 5m 
   chart:
     spec:
-      chart: supdabase-ch
+      chart: supdabase
       sourceRef:
         kind: HelmRepository
         name: helm-repo-supabase
