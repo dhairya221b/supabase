@@ -7,7 +7,7 @@ spec:
   interval: 5m 
   chart:
     spec:
-      chart: supabase
+      chart: rock8s
       sourceRef:
         kind: HelmRepository
         name: helm-repo-supabase
