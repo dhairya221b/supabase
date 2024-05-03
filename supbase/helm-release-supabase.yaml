@@ -7,8 +7,8 @@ spec:
   interval: 5m 
   chart:
     spec:
-      chart: supabase
-      version : "0.3.15"
+      chart: rock8s/supabase
+      #version : "0.3.15"
       sourceRef:
         kind: HelmRepository
         name: helm-repo-supabase
