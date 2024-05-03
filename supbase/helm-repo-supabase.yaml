@@ -5,4 +5,5 @@ metadata:
   namespace: supabase
 spec: 
   interval: 1m
-  url: https://charts.rock8s.com
+  url: https://charts.aigis.uk
+  
