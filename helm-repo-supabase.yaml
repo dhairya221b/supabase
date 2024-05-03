@@ -2,7 +2,7 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: helm-repo-supabase
-  namespace: supdabase
+  namespace: supabase
 spec: 
   interval: 1m
   url: https://charts.rock8s.com
