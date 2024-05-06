@@ -5,5 +5,4 @@ metadata:
   namespace: supabase
 spec: 
   interval: 1m
-  url: https://github.com/supabase-community/supabase-kubernetes/charts/supabase/
-  
+  url:  https://charts.bitnami.com/bitnami
