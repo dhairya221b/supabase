@@ -5,4 +5,4 @@ metadata:
   namespace: supabase
 spec: 
   interval: 1m
-  url: https://supabase-community.github.io/supabase-kubernetes/build/supabase-0.0.3.tgz
+  url: https://improwised.github.io/charts/
