@@ -12,8 +12,8 @@ spec:
       version : 0.1.0
       sourceRef:
         kind: HelmRepository
-        name: improwised-helm-source
-        namespace: flux-system
+          name: helm-repo-supabase
+          namespace: supabase
   values:
     secret:
       jwt:
