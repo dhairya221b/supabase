@@ -163,7 +163,7 @@ spec:
       image:
         repository: kong
         tag: 2.8.1
-      environment:
+      environment: 
         KONG_DECLARATIVE_CONFIG: /usr/local/kong/kong.yml
         KONG_LOG_LEVEL: info
       ingress:
