@@ -141,9 +141,9 @@ spec:
           path: /status
           port: 5000
         initialDelaySeconds: 3
-      # persistence:
-      #   enabled: true
-      #   storageClassName: "localpath"
+      persistence:
+        enabled: true
+        storageClassName: "localpath"
     imgproxy:
       image:
         tag: v3.8.0
