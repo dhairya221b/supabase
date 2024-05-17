@@ -170,7 +170,7 @@ spec:
         enabled: true
         className: "traefik"
         annotations:
-          nginx.ingress.kubernetes.io/rewrite-target: /
+          # nginx.ingress.kubernetes.io/rewrite-target: /
         tls: []
           # - secretName: example-ingress-tls
           #   hosts:
