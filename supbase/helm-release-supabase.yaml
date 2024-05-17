@@ -42,9 +42,9 @@ spec:
             - -U
             - postgres
         initialDelaySeconds: 3
-      # persistence:
-      #   enabled: true
-      #   storageClassName: "localpath"
+      persistence:
+        enabled: true
+        storageClassName: "local-path"
 
     studio:
       image:
@@ -141,9 +141,9 @@ spec:
           path: /status
           port: 5000
         initialDelaySeconds: 3
-        # persistence:
-        #   enabled: true
-        #   storageClassName: "localpath"
+        persistence:
+          enabled: true
+          storageClassName: "local-path"
     imgproxy:
       image:
         tag: v3.8.0
@@ -157,7 +157,7 @@ spec:
         initialDelaySeconds: 3
         persistence:
           enabled: true
-          storageClassName: "localpath"
+          storageClassName: "local-path"
 
     kong:
       image:
