@@ -30,8 +30,7 @@ spec:
         password: example123456
         database: postgres
       analytics:
-        apiKey: your-super-secret-and-long-logflare-key
-
+        apiKey: your-super-secret-and-long-logflare-ke
     db:
       enabled: true
       image:
@@ -43,9 +42,9 @@ spec:
             - -U
             - postgres
         initialDelaySeconds: 3
-      persistence:
-        enabled: true
-        storageClassName: "localpath"
+      # persistence:
+      #   enabled: true
+      #   storageClassName: "localpath"
 
     studio:
       image:
@@ -59,7 +58,7 @@ spec:
         httpGet:
           path: /api/profile
           port: 3000
-        initialDelaySeconds: 3
+        initialDelaySeconds: 
 
     auth:
       image:
@@ -73,10 +72,33 @@ spec:
         GOTRUE_SMTP_HOST: "smtp.example.com"
         GOTRUE_SMTP_PORT: "587"
         GOTRUE_SMTP_SENDER_NAME: "your-mail@example.com"
-
     rest:
       image:
-        tag: v12.0.1
+        repository: postgrest/postgrest
+        pullPolicy: IfNotPresent
+        tag: "latest"
+      serviceAccount:
+        # Specifies whether a service account should be created
+        create: true
+        # Annotations to add to the service account
+        annotations: {}
+        # The name of the service account to use.
+        # If not set and create is true, a name is generated using the fullname template
+        name: ""
+      service:
+        type: ClusterIP
+        port: 3000
+      environment:
+        # Override the database hostname if using external database
+        # DB_HOST: DATABASE.NAMESPACE.svc.cluster.local
+        DB_USER: authenticator
+        DB_PORT: 5432
+        DB_DRIVER: postgres
+        DB_SSL: disable  # disable, allow, prefer, require, verify-ca, verify-full
+        PGRST_DB_SCHEMAS: public,storage,graphql_public
+        PGRST_DB_ANON_ROLE: anon
+        PGRST_DB_USE_LEGACY_GUCS: false
+        PGRST_APP_SETTINGS_JWT_EXP: 3600
 
     realtime:
       image:
@@ -89,8 +111,28 @@ spec:
 
     meta:
       image:
-        tag: v0.80.0
-
+        repository: supabase/postgres-meta
+        pullPolicy: IfNotPresent
+        tag: "latest"
+      serviceAccount:
+        # Specifies whether a service account should be created
+        create: true
+        # Annotations to add to the service account
+        annotations: {}
+        # The name of the service account to use.
+        # If not set and create is true, a name is generated using the fullname template
+        name: ""
+      service:
+        type: ClusterIP
+        port: 8080
+      environment:
+        # Override the database hostname if using external database
+        # DB_HOST: DATABASE.NAMESPACE.svc.cluster.local
+        DB_USER: supabase_admin
+        DB_PORT: 5432
+        DB_DRIVER: postgres
+        DB_SSL: disable  # disable, allow, prefer, require, verify-ca, verify-full
+        PG_META_PORT: "8080"
     storage:
       image:
         tag: v0.46.4
@@ -99,10 +141,9 @@ spec:
           path: /status
           port: 5000
         initialDelaySeconds: 3
-      persistence:
-        enabled: true
-        storageClassName: "localpath"
-
+      # persistence:
+      #   enabled: true
+      #   storageClassName: "localpath"
     imgproxy:
       image:
         tag: v3.8.0
@@ -114,9 +155,9 @@ spec:
             - imgproxy
             - health
         initialDelaySeconds: 3
-      persistence:
-        enabled: true
-        storageClassName: "localpath"
+        persistence:
+          enabled: true
+          storageClassName: "localpath"
 
     kong:
       image:
@@ -127,7 +168,7 @@ spec:
         KONG_LOG_LEVEL: info
       ingress:
         enabled: true
-        className: "nginx"
+        className: "traefik"
         annotations:
           nginx.ingress.kubernetes.io/rewrite-target: /
         tls: []
@@ -139,7 +180,6 @@ spec:
             paths:
               - path: /
                 pathType: Prefix
-
     analytics:
       image:
         tag: 1.4.0
@@ -147,8 +187,7 @@ spec:
         httpGet:
           path: /health
           port: 4000
-        initialDelaySeconds: 3
-
+        initialDelaySeconds: 
     vector:
       image:
         tag: 0.34.0-alpine
@@ -166,8 +205,7 @@ spec:
       volumes:
         - name: pod-logs
           hostPath:
-            path: /var/log/pods
-
+            path: /var/log/pod
     functions:
       image:
         tag: v1.41.2
